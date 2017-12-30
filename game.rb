@@ -1,5 +1,5 @@
-require 'board'
-require 'settings'
+require './board'
+#require 'settings'
 
 class Game
   def initialize settings
@@ -14,7 +14,10 @@ class Game
   end
 
   def game_loop
-    until @snake.impact?
+    until false
+      system "clear"
+      puts @board.render
+      puts @snake.segments.map{|seg| seg.pos.to_s + " => " + seg.dir.to_s + "& #{seg.delay}" }
       input = gets.chomp
       @snake.change_dir @controls[input]
       @board.next_frame

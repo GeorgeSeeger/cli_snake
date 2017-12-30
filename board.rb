@@ -1,4 +1,4 @@
-require 'snake'
+require './snake'
 
 class Board 
   attr_reader :snake
@@ -18,7 +18,7 @@ class Board
       @snake.eat
       @foods.delete found_food
     end
-    make_food if rand < food_prob
+    make_food if rand < @food_prob
     render
   end
 
@@ -27,8 +27,11 @@ class Board
     @snake.segments.each do |seg|
       board[seg.pos[0]][seg.pos[1]] = '#'
     end
+    @foods.each do |f|
+      board[f.pos[0]][f.pos[1]] = 'o'
+    end
     board[@snake.head.pos[0]][@snake.head.pos[1]] = '@'
-    return board
+    return board.map{|r| r.join("")}
   end
 
   def make_food

@@ -24,12 +24,13 @@ class Board
 
   def render
     board = @board.map{|r| r.dup }
-    @snake.segments.each do |seg|
-      board[seg.pos[0]][seg.pos[1]] = '#'
-    end
     @foods.each do |f|
       board[f.pos[0]][f.pos[1]] = 'o'
     end
+    @snake.segments.each do |seg|
+      board[seg.pos[0]][seg.pos[1]] = '#'
+    end
+    board[@snake.tail.pos[0]][@snake.tail.pos[1]] = render_tail
     board[@snake.head.pos[0]][@snake.head.pos[1]] = '@'
     return board.map{|r| r.join("")}
   end
@@ -40,6 +41,11 @@ class Board
                 .reject{|p| @snake.segments.any?{|seg| seg.pos == p }}
                 .sample
     @foods.push Food.new(pos)
+  end
+
+  def render_tail
+    chars = {up: "v", right: "<", left: ">", down: "^"}
+    @snake.dirs.select{|k, v| v == @snake.tail.dir}.map{|k, v| chars[k]}.first
   end
 end
 

@@ -1,5 +1,5 @@
 class Snake
-  attr_reader :segments, :head, :pos, :dir
+  attr_reader :segments, :head, :tail, :pos, :dir, :dirs
 
   def initialize pos, size, inc
     @pos = pos
@@ -42,7 +42,7 @@ class Snake
   def eat
     @size += @inc
     (1..@inc).each do |i|
-      @segments.push(Segment.new(@tail.pos, @tail.dir, i))
+      @segments.push(Segment.new(@tail.pos, @tail.dir, @tail.delay + i))
     end
     @tail = @segments.last
   end

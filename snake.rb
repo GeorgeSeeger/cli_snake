@@ -1,5 +1,5 @@
 class Snake
-  attr_reader :segments, :pos, :dir
+  attr_reader :segments, :head, :pos, :dir
 
   def initialize pos, size, inc
     @pos = pos
@@ -29,16 +29,18 @@ class Snake
   def make_segments
     @segments = (0...size).map{|i| Segment.new(@pos, @dir, i) }
     @head = segments.first
+    @tail = segments.last
   end
 
   def impact?
     @segments[1..-1].any?{|seg| seg.pos == @head.pos }
   end
 
-  def eat 
-    tail = @segments.last
+  def eat
     (1..@inc).each do |i|
-      @segments.push(Segment.new(tail.pos, tail.dir, i))
+      @segments.push(Segment.new(@tail.pos, @tail.dir, i))
+    end
+    @tail = @segments.last
   end
 end
 

@@ -1,10 +1,13 @@
 require 'snake'
 
 class Board 
+  attr_reader :snake
+
   def initialize height, width, snake_length, snake_incrememnt, food_probability
     @board = Array.new(height) { Array.new(width) { '.' }}
     @snake = Snake.new([height / 2, width / 2], snake_length, snake_incrememnt)
     @food_prob = food_probability
+    @foods = []
     make_food
   end
 
@@ -33,7 +36,7 @@ class Board
                 .flatten(1)
                 .reject{|p| @snake.segments.any?{|seg| seg.pos == p }}
                 .sample
-    @foods = [Food.new(pos)]
+    @foods.push Food.new(pos)
   end
 end
 

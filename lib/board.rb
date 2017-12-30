@@ -28,13 +28,13 @@ class Board
   def render
     board = @board.map{|r| r.dup }
     @foods.each do |f|
-      board[f.pos[0]][f.pos[1]] = 'o'
+      render_to board, f, 'o'
     end
     @snake.segments.each do |seg|
-      board[seg.pos[0]][seg.pos[1]] = '#'
+      render_to board, seg, '#'
     end
-    board[@snake.tail.pos[0]][@snake.tail.pos[1]] = render_tail
-    board[@snake.head.pos[0]][@snake.head.pos[1]] = '@'
+    render_to board, @snake.tail, render_tail
+    render_to board, @snake.head, '@'
     return board.map{|r| r.join("")}
   end
 
@@ -45,6 +45,10 @@ class Board
                 .reject{|p| @snake.segments.any?{|seg| seg.pos == p }}
                 .sample
     @foods.push Food.new(pos)
+  end
+
+  def render_to(board, item, char)
+    board[item.pos[0]][item.pos[1]] = char
   end
 
   def periodically_bounder_snake

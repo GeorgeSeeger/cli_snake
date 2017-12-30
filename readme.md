@@ -1,10 +1,11 @@
-__Command Line Snake__
+# Command Line Snake
 
 This was made to amuse myself on a train from Kyoto to Tokyo
 
-*CLI Snake v0.1*
-Ruby 2.4.1
-Linux
+*CLI Snake v0.2*
+## __Dependencies__
+* Ruby 2.4.1
+* Linux
 
 Simply download the repo, cd into the folder and play 
 
@@ -31,7 +32,7 @@ o........o....#..#.......
 ```
 
 
-_TODO_ 
+___Todos___ 
   * Be able to fail, at the moment there is no failure state, exit is only with ctrl + c
   * Automatic frames, at the moment newline is required to advance the game state
   * Score counter

@@ -14,13 +14,16 @@ class Game
   end
 
   def game_loop
+    system "clear"
+    puts @board.render
     until false
-      system "clear"
-      puts @board.render
-      puts @snake.segments.map{|seg| seg.pos.to_s + " => " + seg.dir.to_s + "& #{seg.delay}" }
       input = gets.chomp
       @snake.change_dir @controls[input]
       @board.next_frame
+      system "clear"
+      puts @board.render
+      # puts @snake.segments.map{|seg| seg.pos.to_s + " => " + seg.dir.to_s + "& #{seg.delay}" }
+      # puts ""
     end
   end
 end

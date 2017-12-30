@@ -2,7 +2,7 @@ require './game'
 
 settings = {
   "height" => 15,
-  "width" => 15,
+  "width" => 25,
   "snake_increment" => 2,
   "snake_length" => 4,
   "food_probability" => 0.10,

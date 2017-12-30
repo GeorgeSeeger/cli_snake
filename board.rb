@@ -23,7 +23,7 @@ class Board
   end
 
   def render
-    board = @board.dup
+    board = @board.map{|r| r.dup }
     @snake.segments.each do |seg|
       board[seg.pos[0]][seg.pos[1]] = '#'
     end

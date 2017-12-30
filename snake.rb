@@ -23,7 +23,7 @@ class Snake
   end
 
   def move
-    (1...@size).each do |i|
+    (1...@size).reverse_each do |i|
       @segments[i].move(@segments[i - 1].dir)
     end
     @head.move(@dir)
@@ -51,8 +51,8 @@ end
 class Segment
   attr_reader :dir, :pos, :delay
   def initialize pos, dir, delay
-    @dir = dir
-    @pos = pos
+    @dir = dir.dup
+    @pos = pos.dup
     @delay = delay
   end
 
